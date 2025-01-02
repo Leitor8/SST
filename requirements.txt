@@ -3,8 +3,11 @@
 flask
 Flask-SQLAlchemy
 
+#kafka
+kafka-python
+
 #database
-psychopg2
+psycopg2
 
 #testing
 pytest

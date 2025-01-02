@@ -4,7 +4,7 @@ from os import environ
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] - environ.get('DB_URL')
+app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
 
 db = SQLAlchemy(app)
 
@@ -15,6 +15,7 @@ class Order(db.Model):
 
     def json(self):
         return {'id': id}
+
 db.create_all()
 
 @app.route('/test', methods=['GET'])
