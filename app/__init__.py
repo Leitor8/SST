@@ -3,45 +3,25 @@ from mvc_flask import FlaskMVC
 from flask_sqlalchemy import SQLAlchemy
 from os import environ
 
+
+
 def create_app():
     app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
 
     FlaskMVC(app)
-
+    
     return app
 
+
 app = create_app()
+db = SQLAlchemy(app=app)
 
 
-# app.config['SQLALCHEMY_DATABASE_URI'] = environ.get('DB_URL')
 
-# db = SQLAlchemy(app)
+from app.models.orders import Order
+from app.controllers.order_controller import OrderController
 
-# class Order(db.Model):
-#     __tablename__ = 'orders'
-
-#     id = db.Column(db.Integer, primary_key = True)
-
-#     def json(self):
-#         return {'id': id}
-
-# db.create_all()
-
-# @app.route('/test', methods=['GET'])
-# def test():
-#     return make_response(jsonify({'message': 'test route'}), 200)
-
-# @app.route('/orders/<int:id>', methods=['GET'])
-# def get_order(id):
-#     try:
-#         order = Order.query.filter_by(id=id).first()
-#         return make_response(jsonify({'order': order.json()}), 200)
-#     except:
-#         return make_response(jsonify({'message': 'Error getting order'}, 500))
-    
-# @app.route('/logs', methods=['GET'])
-# def get_logs():
-#     try:
-#         return make_response(jsonify({'message': 'logs'}), 200)
-#     except:
-#         return make_response(jsonify({'message': 'Error getting logs'}), 500)
+with app.app_context():
+    db.create_all()
+    db.session.commit()

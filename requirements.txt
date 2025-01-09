@@ -2,10 +2,10 @@
 #api packages
 flask
 flask-sqlalchemy
-mvc-flask
-
-#kafka
 kafka-python
+flask-kafka
+flask-migrate
+mvc-flask
 
 #database
 psycopg2
