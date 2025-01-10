@@ -1,0 +1,14 @@
+
+#api packages
+flask
+flask-sqlalchemy
+kafka-python
+flask-kafka
+flask-migrate
+mvc-flask
+
+#database
+psycopg2
+
+#testing
+pytest
